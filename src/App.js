@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {UserProfileContainer} from "./containers/userProfile";
+import { useParams } from "react-router-dom";
 
 import logo from './logo.svg';
 import './App.css';
@@ -18,6 +19,8 @@ function App() {
     setCounter(counter + 1);
   }
 
+  const { id, alias } = useParams();
+
   return (
   <div className="App">
     <header className="App-header">
@@ -25,6 +28,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <button onClick={inc}>Click me UP!</button>
         <div>count: {counter}</div>
+        <div>Article #{id} with alias {alias}</div>
       </UserProfileContainer>
     </header>
   </div>
