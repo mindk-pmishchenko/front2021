@@ -8,17 +8,18 @@ import {
 
 import './index.css';
 import App from './App';
+import ErrorBoundary from './components/ErrorBoundary';
 
 ReactDOM.render(
   <React.StrictMode>
+      <ErrorBoundary>
       <BrowserRouter>
           <Routes>
               <Route path="/" element={<App />}/>
-              <Route path="/articles/:id" element={<div>articles</div>}/>
-              <Route path="/article" element={<div>new article</div>}/>
-              <Route path="/test/*" element={<div>404</div>} />
+              <Route path="/404" element={<div>404</div>}/>
           </Routes>
       </BrowserRouter>
+      </ErrorBoundary>
   </React.StrictMode>,
   document.getElementById('root')
 );
