@@ -19,14 +19,14 @@ ReactDOM.render(
   <React.StrictMode>
       <QueryClientProvider client={queryClient}>
           <ErrorBoundary>
-              <BrowserRouter>
-                  <Routes>
-                      <Route path="/" element={<App />}/>
-                      <Route path="/posts" element={<PostsContainer />}/>
-                      <Route path="/form" element={<FormContainer />}/>
-                      <Route path="/404" element={<div>404</div>}/>
-                  </Routes>
-              </BrowserRouter>
+                  <BrowserRouter>
+                      <Routes>
+                          <Route path="/" element={<App />}/>
+                          <Route path="/posts" element={<PostsContainer />}/>
+                          <Route path="/form" element={<FormContainer />}/>
+                          <Route path="/404" element={<div>404</div>}/>
+                      </Routes>
+                  </BrowserRouter>
           </ErrorBoundary>
       </QueryClientProvider>
   </React.StrictMode>,
