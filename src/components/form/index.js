@@ -1,24 +1,25 @@
 import React, {useState} from 'react';
-import { Formik, Form, Field, ErrorMessage } from 'formik';
+import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import Button from '@mui/material/Button';
-import FormikAutocomplete from '../FormikAutocomplete';
 import Cropper from 'react-cropper';
 import 'cropperjs/dist/cropper.css';
+
+import Button from '@mui/material/Button';
 import { Box } from "@material-ui/core";
+
+import FormikAutocomplete from '../FormikAutocomplete';
 
 const UserForm = ({userData}) => {
 
     const schema = Yup.object().shape({
         name: Yup.string().required(),
         email: Yup.string(),
-        // visibility: Yup.object(),
         age: Yup.number().typeError("Must be a number").required('Age is required!').positive('Age must be > 0').integer('Age must be a number!')
     })
 
 
     const onFormSubmit = (data) => {
-        mutate({...data, logo: croppedImage});
+        console.log(data);
     }
 
     const options = [
