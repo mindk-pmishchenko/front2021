@@ -1,17 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {
-    BrowserRouter,
-    Routes,
-    Route
-} from "react-router-dom";
 import { QueryClient, QueryClientProvider } from 'react-query';
 
 import './index.css';
 import App from './App';
 import ErrorBoundary from './components/ErrorBoundary';
-import PostsContainer from './containers/posts';
-import FormContainer from './containers/form';
 
 const queryClient = new QueryClient();
 
@@ -19,14 +12,7 @@ ReactDOM.render(
   <React.StrictMode>
       <QueryClientProvider client={queryClient}>
           <ErrorBoundary>
-                  <BrowserRouter>
-                      <Routes>
-                          <Route path="/" element={<App />}/>
-                          <Route path="/posts" element={<PostsContainer />}/>
-                          <Route path="/form" element={<FormContainer />}/>
-                          <Route path="/404" element={<div>404</div>}/>
-                      </Routes>
-                  </BrowserRouter>
+              <App />
           </ErrorBoundary>
       </QueryClientProvider>
   </React.StrictMode>,

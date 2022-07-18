@@ -1,50 +1,36 @@
-import {useState} from 'react';
-import UserProfileContainer from "./containers/userProfile";
-import { useParams, Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import React, {useState} from 'react';
+import {BrowserRouter, Routes, Route} from "react-router-dom";
 
-import logo from './logo.svg';
 import './App.css';
-import useCustomHook from './customHook';
 import authContext from './authContext';
+import PostsContainer from "./containers/posts";
+import FormContainer from "./containers/form";
+import AuthContainer from "./containers/auth";
+import ProtectedRoute from "./components/auth/components/ProtectedRoute";
+import GuestRoute from "./components/auth/components/GuestRoute";
 
 function App() {
 
-  const [counter, setCounter] = useState(0);
-  const [string, setString] = useState('a');
-  const [userData, setUserData] = useState({authenticated: false, user: null, setUserData: () => {}});
+  const [userData, setUserData] = useState({authenticated: false, user: null});
 
-  const inc = () => {
-    setCounter(counter + 1);
-    setUserData({authenticated: true, user: {id: 1}, setUserData})
-  }
 
-  const add = () => {
-    setString(string + string);
-    setCounter(counter + 1);
-  }
-
-  const { id, alias } = useParams();
-
-  const navigate = useNavigate();
-
-  const goTo404 = () => {
-    navigate('/404');
-  }
 
   return (
   <div className="App">
     <authContext.Provider value={userData}>
-      <header className="App-header">
-        <UserProfileContainer firstName="first" lastName="last" add={add} string={string} birthdayYear={1923}
-        user={{}}>
-          <img src={logo} className="App-logo" alt="logo" />
-          <button onClick={inc}>Click me UP!</button>
-          <button onClick={goTo404}>Go to 404</button>
-          <div>count: {counter}</div>
-          <div>Article #{id} with alias {alias}</div>
-        </UserProfileContainer>
-      </header>
+      <BrowserRouter>
+        <Routes>
+          <Route element={<ProtectedRoute />}>
+            <Route path="/" element={<PostsContainer />} />
+            <Route path="/form" element={<FormContainer />} />
+          </Route>
+          {/*<GuestRoute path="login" element={<AuthContainer />}>*/}
+          {/*<Route path="/" element={<ProtectedRoute><PostsContainer /></ProtectedRoute>}/>*/}
+          {/*<Route path="/form" element={<ProtectedRoute><FormContainer /></ProtectedRoute>}/>*/}
+          {/*<Route path="/404" element={<div>404</div>}/>*/}
+          <Route path="/login" element={<AuthContainer />}/>
+        </Routes>
+      </BrowserRouter>
     </authContext.Provider>
   </div>
   );
